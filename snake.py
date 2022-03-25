@@ -18,6 +18,7 @@ class Snake:
     def generate_snake(self):
         for position in STARTING_POS:
             body_part = Turtle("square")
+            body_part.penup()
             body_part.color("white")
             body_part.setposition(position)
             self.snake.append(body_part)

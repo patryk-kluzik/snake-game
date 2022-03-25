@@ -1,6 +1,6 @@
-from turtle import Turtle, Screen
+from turtle import Screen
 from snake import Snake
-import random
+from food import Food
 import time
 
 screen = Screen()
@@ -12,6 +12,7 @@ screen.tracer(0)
 game_over = False
 
 snake = Snake()
+food = Food()
 
 controls = {
     "arrows": ['Up', 'Left', 'Down', 'Right'],
@@ -23,10 +24,9 @@ controls_choice = screen.numinput(title="Choose your controls", prompt="Type (1)
 
 if controls_choice == 1:
     game_controls = controls["arrows"]
-elif controls_choice == 2:
-    game_controls = controls["wasd"]
 else:
-    exit()
+    game_controls = controls["wasd"]
+
 screen.listen()
 screen.onkey(fun=snake.go_up, key=game_controls[0])
 screen.onkey(fun=snake.go_left, key=game_controls[1])
@@ -37,6 +37,9 @@ while not game_over:
     screen.update()
     time.sleep(0.1)
     snake.move()
+
+
+    
 
 """
 headings : 0 east 90 north 180 west 270 south
