@@ -9,6 +9,8 @@ SCREEN_HEIGHT = 600
 MAX_X = SCREEN_WIDTH / 2
 MAX_Y = SCREEN_HEIGHT / 2
 PADDING = 20
+STARTING_TIME_DELAY = 0.15
+LOWEST_TIME_DELAY = 0.05
 
 screen = Screen()
 screen.setup(width=SCREEN_WIDTH, height=SCREEN_HEIGHT)
@@ -42,16 +44,20 @@ score = Score(max_y=MAX_Y)
 current_score = score.score
 game_over = False
 
+time_delay = 0.06
 while not game_over:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(time_delay)
     snake.move()
 
     # detect collision with food
     if snake.head.distance(food) < 10:
         food.new_food(max_y=MAX_Y, max_x=MAX_X)
         current_score = score.update_score()
+
         snake.grow()
+        if current_score % 5 == 0 and time_delay >= LOWEST_TIME_DELAY:
+            time_delay -= .01
 
     # detect collision with wall (game over)
     if snake.head.xcor() > MAX_X - PADDING or snake.head.xcor() < -MAX_X + PADDING \

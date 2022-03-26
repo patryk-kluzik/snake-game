@@ -23,6 +23,7 @@ class Score(Turtle):
         self.score += 1
         self.clear()
         self.write_score()
+        return self.score
 
     def game_over(self):
         self.setposition(0,0)
