@@ -44,7 +44,7 @@ score = Score(max_y=MAX_Y)
 current_score = score.score
 game_over = False
 
-time_delay = 0.06
+time_delay = STARTING_TIME_DELAY
 while not game_over:
     screen.update()
     time.sleep(time_delay)
