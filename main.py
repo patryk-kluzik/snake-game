@@ -54,23 +54,25 @@ while not game_over:
     if snake.head.distance(food) < 10:
         food.new_food(max_y=MAX_Y, max_x=MAX_X)
         current_score = score.update_score()
-
         snake.grow()
+
         if current_score % 5 == 0 and time_delay >= LOWEST_TIME_DELAY:
             time_delay -= .01
 
     # detect collision with wall (game over)
     if snake.head.xcor() > MAX_X - PADDING or snake.head.xcor() < -MAX_X + PADDING \
             or snake.head.ycor() > MAX_Y - PADDING or snake.head.ycor() < -MAX_Y + PADDING:
-        game_over = True
-        score.game_over()
+        score.reset_score()
+        current_score = score.score
+        time_delay = STARTING_TIME_DELAY
+        snake.reset_snake()
 
-    #detect collision with tail
+    # detect collision with tail
     for snake_part in snake.snake[1:]:
         if snake.head.distance(snake_part) < 10:
-            print(snake.head.distance(snake_part))
-            game_over = True
-            score.game_over()
-
+            score.reset_score()
+            current_score = score.score
+            time_delay = STARTING_TIME_DELAY
+            snake.reset_snake()
 
 screen.exitonclick()

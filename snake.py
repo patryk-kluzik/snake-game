@@ -45,6 +45,13 @@ class Snake:
     def grow(self):
         self.add_part(self.snake[-1].pos())
 
+    def reset_snake(self):
+        for snake_part in self.snake:
+            snake_part.ht()
+        self.snake.clear()
+        self.generate_snake()
+        self.head = self.snake[0]
+
     def move(self):
         for snake_part in range(len(self.snake) - 1, 0, -1):
             new_x = self.snake[snake_part - 1].xcor()
